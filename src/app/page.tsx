@@ -1,9 +1,13 @@
-import { Header } from '@/components/Header';
+import { postRepository } from '@/repositories/post';
 
-export default function HomePage() {
+export default async function HomePage() {
+  const posts = await postRepository.findAll();
+
   return (
     <div>
-      <Header />
+      {posts.map(post => {
+        return <p key={post.id}>{post.title}</p>;
+      })}
     </div>
   );
 }
